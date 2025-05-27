@@ -1,0 +1,106 @@
+.register-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .left {
+    flex: 0 0 65%;
+    background: linear-gradient(
+        rgba(13, 71, 161, 0.85),
+        rgba(13, 71, 161, 0.85)
+      ),
+      url('../../../assets/pessoas-que-trabalham-em-equipe.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+
+    .carousel {
+      width: 80%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      .carousel-message {
+        position: absolute;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        transform: translateY(0);
+      }
+
+      .carousel-message.active {
+        opacity: 1;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+  }
+
+  .register-form {
+    flex: 0 0 35%;
+    padding: 3rem;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      h2 {
+        margin-bottom: 1rem;
+      }
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      ::ng-deep button[mat-raised-button] {
+        background-color: #1976d2; // Azul padrão forte (ativo)
+        color: #fff;
+        transition: background-color 0.3s ease;
+
+        &:disabled {
+          background-color: #bbdefb; // Azul clarinho (desabilitado)
+          color: #777272;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+// Responsivo
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+
+    .left,
+    .register-form {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+
+    .left {
+      height: 40vh;
+    }
+
+    .register-form {
+      height: auto;
+    }
+  }
+}

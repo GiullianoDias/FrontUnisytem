@@ -1,0 +1,38 @@
+<div class="register-container">
+  <!-- Left Side: Background Image with Carousel -->
+  <div class="left">
+    <div class="carousel">
+      <div *ngFor="let message of messages; let i = index" [class.active]="i === activeIndex()" class="carousel-message">
+        <h2>{{ message }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="register-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h2>Criar Conta</h2>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input matInput formControlName="password" type="password" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmar Senha</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" />
+    </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Criar Conta</button>
+    </form>
+  </div>
+</div>
