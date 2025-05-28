@@ -12,7 +12,11 @@ export const routes: Routes = [
     { path: 'registerCompany', loadComponent: () => import('./pages/register-company/register-company.component')
       .then(m => m.RegisterCompanyComponent)
     },
-    { path: 'registercompany', redirectTo: 'registerCompany' }
+    { path: 'config/company', loadComponent: () => import('./pages/config/company/company.component')
+      .then(m => m.CompanyComponent)
+    },
+    { path: 'registercompany', redirectTo: 'registerCompany' },
+    { path: 'config/company', redirectTo: 'mycompany' },
   ]
 },
 ];

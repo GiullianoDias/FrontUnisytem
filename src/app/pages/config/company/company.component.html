@@ -1,0 +1,90 @@
+<div class="company-container">
+  <h1 class="page-title">Empresa</h1>
+
+  <div class="action-buttons">
+    <button mat-raised-button color="primary" (click)="onEditCompany()">
+      <mat-icon>edit</mat-icon>
+      Editar Empresa
+    </button>
+    <button mat-raised-button color="primary" (click)="onManageBranches()">
+      <mat-icon>business</mat-icon>
+      Gestão de Filiais
+    </button>
+    <button mat-raised-button color="primary" (click)="onSalaryRanges()">
+      <mat-icon>payments</mat-icon>
+      Faixas Salariais
+    </button>
+    <button mat-raised-button color="primary" (click)="onJobLevel()">
+      <mat-icon>work</mat-icon>
+      Job Level
+    </button>
+  </div>
+
+  <div class="company-data" *ngIf="companyData">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ companyData.companyName }}</mat-card-title>
+        <mat-card-subtitle>{{ companyData.companyType }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="data-grid">
+          <div class="data-section">
+            <h3>Informações Básicas</h3>
+            <div class="data-row">
+              <span class="label">CNPJ:</span>
+              <span class="value">{{ companyData.cnpj }}</span>
+            </div>
+            <div class="data-row">
+              <span class="label">E-mail:</span>
+              <span class="value">{{ companyData.email }}</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Celular:</span>
+              <span class="value">{{ companyData.cellPhone }}</span>
+            </div>
+          </div>
+
+          <div class="data-section">
+            <h3>Endereço</h3>
+            <div class="data-row">
+              <span class="label">CEP:</span>
+              <span class="value">{{ companyData.cep }}</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Endereço:</span>
+              <span class="value">{{ companyData.address }}</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Bairro:</span>
+              <span class="value">{{ companyData.neighborhood }}</span>
+            </div>
+            <div class="data-row">
+              <span class="label">Cidade/Estado:</span>
+              <span class="value">{{ companyData.city }} - {{ companyData.state }}</span>
+            </div>
+          </div>
+
+          <div class="data-section">
+            <h3>Administrador</h3>
+            <div class="data-row">
+              <span class="label">Nome:</span>
+              <span class="value">{{ companyData.administratorName }}</span>
+            </div>
+            <div class="data-row">
+              <span class="label">CPF:</span>
+              <span class="value">{{ companyData.cpf }}</span>
+            </div>
+          </div>
+
+          <div class="data-section" *ngIf="companyData.information">
+            <h3>Informações Adicionais</h3>
+            <div class="data-row">
+              <span class="value">{{ companyData.information }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
