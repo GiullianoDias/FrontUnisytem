@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,11 +18,11 @@ import { CompanyService } from '../../services/company.service';
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
   private companyService = inject(CompanyService);
   private registrationDataService = inject(RegistrationDataService);
 
-  user = computed(() => this.registrationDataService.getFormData()?.name);
+  userName: string | null = null;
   hasCompany = computed(() => !!this.companyService.getCurrentCompanyData());
 
   // Menu states
@@ -30,4 +30,11 @@ export class MainLayoutComponent {
   systemMenuExpanded = false;
   jobsMenuExpanded = false;
   usersMenuExpanded = false;
+
+  ngOnInit() {
+    // Subscribe to registration data changes
+    this.registrationDataService.getFormDataObservable().subscribe(data => {
+      this.userName = data?.name || null;
+    });
+  }
 }
