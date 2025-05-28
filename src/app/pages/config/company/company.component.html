@@ -63,6 +63,10 @@
               <span class="label">Cidade/Estado:</span>
               <span class="value">{{ companyData.city }} - {{ companyData.state }}</span>
             </div>
+            <div class="data-row" *ngIf="companyData.information">
+              <span class="label">Complemento:</span>
+              <span class="value">{{ companyData.information }}</span>
+            </div>
           </div>
 
           <div class="data-section">
@@ -77,12 +81,6 @@
             </div>
           </div>
 
-          <div class="data-section" *ngIf="companyData.information">
-            <h3>Informações Adicionais</h3>
-            <div class="data-row">
-              <span class="value">{{ companyData.information }}</span>
-            </div>
-          </div>
         </div>
       </mat-card-content>
     </mat-card>

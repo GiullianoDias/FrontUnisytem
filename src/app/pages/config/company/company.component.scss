@@ -20,6 +20,13 @@
     gap: 0.5rem;
     padding: 0.5rem 1.5rem;
     min-width: 200px;
+    border: 2px solid #bbdefb !important;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #1976d2 !important;
+      background-color: #e3f2fd !important;
+    }
 
     mat-icon {
       margin-right: 0.5rem;
