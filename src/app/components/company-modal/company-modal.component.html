@@ -1,0 +1,148 @@
+<h2 mat-dialog-title>{{ data?.company ? 'Editar Empresa' : 'Gerenciar Empresa' }}</h2>
+
+<form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <!-- Tipo de Empresa -->
+    <div class="form-row company-type-row">
+      <mat-form-field appearance="outline" class="company-type-field">
+        <mat-label>Tipo de Empresa</mat-label>
+        <mat-select formControlName="companyType">
+          <mat-option *ngFor="let type of companyTypes" [value]="type">
+            {{type}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="companyForm.get('companyType')?.hasError('required')">
+          Tipo de empresa é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Nome e CNPJ -->
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome da Empresa</mat-label>
+        <input matInput formControlName="companyName" placeholder="Digite o nome da empresa">
+        <mat-error *ngIf="companyForm.get('companyName')?.hasError('required')">
+          Nome da empresa é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>CNPJ</mat-label>
+        <input matInput formControlName="cnpj" placeholder="00.000.000/0000-00">
+        <mat-error *ngIf="companyForm.get('cnpj')?.hasError('required')">
+          CNPJ é obrigatório
+        </mat-error>
+        <mat-error *ngIf="companyForm.get('cnpj')?.hasError('pattern')">
+          CNPJ inválido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Endereço -->
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input matInput formControlName="cep" placeholder="00000-000">
+        <mat-error *ngIf="companyForm.get('cep')?.hasError('required')">
+          CEP é obrigatório
+        </mat-error>
+        <mat-error *ngIf="companyForm.get('cep')?.hasError('pattern')">
+          CEP inválido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Endereço</mat-label>
+        <input matInput formControlName="address" placeholder="Digite o endereço">
+        <mat-error *ngIf="companyForm.get('address')?.hasError('required')">
+          Endereço é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="neighborhood" placeholder="Digite o bairro">
+        <mat-error *ngIf="companyForm.get('neighborhood')?.hasError('required')">
+          Bairro é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="state" placeholder="Digite o estado">
+        <mat-error *ngIf="companyForm.get('state')?.hasError('required')">
+          Estado é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="city" placeholder="Digite a cidade">
+        <mat-error *ngIf="companyForm.get('city')?.hasError('required')">
+          Cidade é obrigatória
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Complemento</mat-label>
+        <input matInput formControlName="information" placeholder="Informações adicionais">
+      </mat-form-field>
+    </div>
+
+    <!-- Contato e Administrador -->
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Celular</mat-label>
+        <input matInput formControlName="cellPhone" placeholder="(00) 00000-0000">
+        <mat-error *ngIf="companyForm.get('cellPhone')?.hasError('required')">
+          Celular é obrigatório
+        </mat-error>
+        <mat-error *ngIf="companyForm.get('cellPhone')?.hasError('pattern')">
+          Celular inválido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nome do Administrador</mat-label>
+        <input matInput formControlName="administratorName" placeholder="Digite o nome do administrador">
+        <mat-error *ngIf="companyForm.get('administratorName')?.hasError('required')">
+          Nome do administrador é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpf" placeholder="000.000.000-00">
+        <mat-error *ngIf="companyForm.get('cpf')?.hasError('required')">
+          CPF é obrigatório
+        </mat-error>
+        <mat-error *ngIf="companyForm.get('cpf')?.hasError('pattern')">
+          CPF inválido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" placeholder="Digite o e-mail">
+        <mat-error *ngIf="companyForm.get('email')?.hasError('required')">
+          E-mail é obrigatório
+        </mat-error>
+        <mat-error *ngIf="companyForm.get('email')?.hasError('email')">
+          E-mail inválido
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!companyForm.valid">
+      {{ data?.company ? 'Atualizar' : 'Salvar' }}
+    </button>
+  </mat-dialog-actions>
+</form>

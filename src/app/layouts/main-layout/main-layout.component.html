@@ -1,0 +1,101 @@
+<div class="main-container">
+  <aside class="sidebar">
+    <nav>
+      <!-- Config. da Empresa -->
+      <mat-expansion-panel [expanded]="companyMenuExpanded" class="menu-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>business</mat-icon>
+            Config. da Empresa
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a routerLink="/loged/registerCompany" class="submenu-item">
+          <mat-icon>domain</mat-icon>
+          Minha Empresa
+        </a>
+        <a *ngIf="hasCompany()" routerLink="/loged/benefits" class="submenu-item">
+          <mat-icon>card_giftcard</mat-icon>
+          Benefícios
+        </a>
+        <a *ngIf="hasCompany()" routerLink="/loged/areas" class="submenu-item">
+          <mat-icon>category</mat-icon>
+          Áreas
+        </a>
+        <a *ngIf="hasCompany()" routerLink="/loged/positions" class="submenu-item">
+          <mat-icon>work</mat-icon>
+          Cargos
+        </a>
+        <a *ngIf="hasCompany()" routerLink="/loged/branches" class="submenu-item">
+          <mat-icon>business</mat-icon>
+          Filiais
+        </a>
+      </mat-expansion-panel>
+
+      <!-- Config. de Sistema -->
+      <mat-expansion-panel [expanded]="systemMenuExpanded" class="menu-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>settings</mat-icon>
+            Config. de Sistema
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a *ngIf="hasCompany()" routerLink="/loged/system-settings" class="submenu-item">
+          <mat-icon>tune</mat-icon>
+          Configurações
+        </a>
+      </mat-expansion-panel>
+
+      <!-- Gestão de Vagas -->
+      <mat-expansion-panel [expanded]="jobsMenuExpanded" class="menu-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>work_outline</mat-icon>
+            Gestão de Vagas
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a *ngIf="hasCompany()" routerLink="/loged/jobs" class="submenu-item">
+          <mat-icon>assignment</mat-icon>
+          Vagas
+        </a>
+      </mat-expansion-panel>
+
+      <!-- Usuários -->
+      <mat-expansion-panel [expanded]="usersMenuExpanded" class="menu-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>people</mat-icon>
+            Usuários
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a *ngIf="hasCompany()" routerLink="/loged/profile" class="submenu-item">
+          <mat-icon>person</mat-icon>
+          Meu Perfil
+        </a>
+        <a *ngIf="hasCompany()" routerLink="/loged/users" class="submenu-item">
+          <mat-icon>group</mat-icon>
+          Todos os Usuários
+        </a>
+      </mat-expansion-panel>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <header class="header">
+      <div class="user-info">
+        <div class="avatar">
+          <img src="https://ui-avatars.com/api/?name={{ user() }}&background=1976d2&color=fff" alt="User avatar">
+        </div>
+        <span class="user-name">{{ user() }}</span>
+      </div>
+    </header>
+
+    <div class="breadcrumb">
+      <!-- Breadcrumb dinâmico ou fixo pode ser implementado -->
+      <span>Início / Página atual</span>
+    </div>
+
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

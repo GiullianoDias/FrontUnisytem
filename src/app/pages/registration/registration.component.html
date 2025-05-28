@@ -10,8 +10,8 @@
 
   <div class="register-form">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <h2>Criar Conta</h2>
-
+      <h2>Criar uma Conta Profissional</h2>
+      <h3>Preencha seus dados para ter acesso</h3>
     <mat-form-field appearance="fill">
       <mat-label>Nome Completo</mat-label>
       <input matInput formControlName="name" />
@@ -31,8 +31,20 @@
       <mat-label>Confirmar Senha</mat-label>
       <input matInput formControlName="confirmPassword" type="password" />
     </mat-form-field>
+    <div *ngIf="form.errors?.['passwordsMismatch'] && (form.get('confirmPassword')?.touched || form.get('confirmPassword')?.dirty)">
+      <p class="error-text">As senhas não coincidem.</p>
+    </div>
+    <mat-checkbox formControlName="acceptedTerms">
+      Li e aceito os
+      <a href="/termos" target="_blank">Termos de Uso & Privacidade</a> e o
+      <a href="/contrato" target="_blank">Contrato de Serviço</a>.
+    </mat-checkbox>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Criar Conta</button>
+      <button mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || !form.get('acceptedTerms')?.value"
+      >Criar Conta</button>
     </form>
   </div>
 </div>

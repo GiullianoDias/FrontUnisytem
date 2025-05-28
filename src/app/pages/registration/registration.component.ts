@@ -1,10 +1,12 @@
 import { Component, inject,effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidationErrors, ValidatorFn, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RegistrationDataService } from '../../services/registration-data.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registration',
   imports: [
@@ -12,7 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCheckboxModule
   ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
@@ -31,12 +34,28 @@ export class RegistrationComponent {
   activeIndex = signal(0);
 
   private intervalId: any;
+  private router = inject(Router);
+  private startCarousel() {
+    this.intervalId = setInterval(() => {
+      this.activeIndex.update(index => (index + 1) % this.messages.length);
+    }, 4000);
+  }
+
+  private passwordsMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordsMismatch: true };
+  };
+
+  registrationDataService = new RegistrationDataService();
+
   form: FormGroup = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', Validators.required]
-  });
+    confirmPassword: ['', Validators.required],
+    acceptedTerms: [false, Validators.requiredTrue]
+  }, { validators: this.passwordsMatchValidator });
   constructor() {
     this.startCarousel();
   }
@@ -51,15 +70,10 @@ export class RegistrationComponent {
         alert('As senhas não coincidem.');
         return;
       }
-
+      this.registrationDataService.setFormData(this.form.value);
       console.log('Registro enviado:', { name, email, password });
+      this.router.navigate(['/loged/registerCompany']);
     }
-  }
-
-  private startCarousel() {
-    this.intervalId = setInterval(() => {
-      this.activeIndex.update(index => (index + 1) % this.messages.length);
-    }, 4000);
   }
 
 }
